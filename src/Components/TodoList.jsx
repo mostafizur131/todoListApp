@@ -4,7 +4,7 @@ import { FaTrash } from "react-icons/fa";
 const TodoList = ({ task, i, deleteTask }) => {
   return (
     <>
-      <div className=" border-b border-opacity-20 border-gray-700 bg-gray-800">
+      <div className=" border-b-2 border-opacity-80 border-gray-700 bg-gray-800">
         <ul className="grid grid-cols-12">
           <li className="p-1 col-span-1 h-12">
             <span>{i + 1}</span>
