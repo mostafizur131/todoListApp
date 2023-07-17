@@ -1,15 +1,13 @@
-import Header from "./Components/Header"
-import TodoApp from "./Components/TodoApp"
-
+import Header from "./Components/Header";
+import TodoApp from "./Components/TodoApp";
 
 function App() {
-
   return (
     <>
-    <Header/>
+      <Header />
       <TodoApp />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
