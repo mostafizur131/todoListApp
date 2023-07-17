@@ -6,13 +6,13 @@ const TodoList = ({ task, i, deleteTask }) => {
     <>
       <div className=" border-b-2 border-opacity-80 border-gray-700 bg-gray-800">
         <ul className="grid grid-cols-12">
-          <li className="p-1 col-span-1 h-12">
+          <li className="px-3 py-2 col-span-1 h-16">
             <span>{i + 1}</span>
           </li>
-          <li className="px-3 py-2 col-span-8 ">
+          <li className="px-3 py-2 col-span-9 ">
             <p>{task}</p>
           </li>
-          <li className="p-2 space-x-2 col-span-3 flex justify-self-end h-12">
+          <li className="p-2 space-x-2 col-span-2 flex justify-self-end h-12">
             <div className="px-2 py-2 font-semibold rounded bg-green-500 text-white leading-none">
               <input
                 type="checkbox"
