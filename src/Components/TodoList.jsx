@@ -2,7 +2,13 @@
 import { FaPen, FaTrash } from "react-icons/fa";
 
 // eslint-disable-next-line react/prop-types
-const TodoList = ({ task, index, deleteTask, markComplete }) => {
+const TodoList = ({
+  task,
+  index,
+  deleteTask,
+  markComplete,
+  handleOpenModal,
+}) => {
   return (
     <>
       <div
@@ -29,7 +35,16 @@ const TodoList = ({ task, index, deleteTask, markComplete }) => {
               />
             </div>
             {task.status ? null : (
-              <button className="px-2 py-2  rounded bg-blue-500 text-white ">
+              <button
+                onClick={() =>
+                  handleOpenModal({
+                    id: task.id,
+                    title: task.title,
+                    status: task.status ? true : false,
+                  })
+                }
+                className="px-2 py-2  rounded bg-blue-500 text-white "
+              >
                 <FaPen />
               </button>
             )}

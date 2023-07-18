@@ -1,9 +1,13 @@
 import { useState } from "react";
 import TodoList from "./TodoList";
+import EditTask from "./EditTask";
 
 const TodoApp = () => {
   const [tasks, setTask] = useState([]);
   const [newTask, setNewTask] = useState("");
+  // Modal State
+  const [openModal, setOpenModal] = useState(false);
+  const [updatedData, setUpdatedData] = useState("");
 
   // Add Task Data
   const addTask = () => {
@@ -30,6 +34,35 @@ const TodoApp = () => {
   const deleteTask = (id) => {
     const updatedTaskList = tasks.filter((task) => task.id !== id);
     setTask(updatedTaskList);
+  };
+
+  // Handle Modal
+  const handleOpenModal = (data) => {
+    setOpenModal(true);
+    setUpdatedData(data);
+  };
+  // Close Modal
+  const handleCloseModal = () => setOpenModal(false);
+
+  // Edit Task Item
+  const handleEditTask = (e) => {
+    const newEntry = {
+      id: updatedData.id,
+      title: e.target.value,
+      status: updatedData.status ? true : false,
+    };
+    setUpdatedData(newEntry);
+  };
+
+  // Update Task
+  const updateTask = () => {
+    const filteredRecords = [...tasks].filter(
+      (task) => task.id !== updatedData.id
+    );
+    const updatedObj = [...filteredRecords, updatedData];
+    setTask(updatedObj);
+    setUpdatedData("newEntry");
+    handleCloseModal();
   };
 
   return (
@@ -83,6 +116,7 @@ const TodoApp = () => {
                     index={i}
                     deleteTask={deleteTask}
                     markComplete={markComplete}
+                    handleOpenModal={handleOpenModal}
                   />
                 ))
               )}
@@ -90,6 +124,15 @@ const TodoApp = () => {
           </div>
         </div>
       </div>
+      {/* Modal */}
+      {openModal && (
+        <EditTask
+          handleCloseModal={handleCloseModal}
+          updatedData={updatedData}
+          handleEditTask={handleEditTask}
+          updateTask={updateTask}
+        />
+      )}
     </div>
   );
 };
