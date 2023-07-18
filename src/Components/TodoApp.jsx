@@ -4,16 +4,31 @@ import TodoList from "./TodoList";
 const TodoApp = () => {
   const [tasks, setTask] = useState([]);
   const [newTask, setNewTask] = useState("");
+
+  // Add Task Data
   const addTask = () => {
-    if (newTask.trim() !== "") {
-      setTask([...tasks, newTask]);
+    if (newTask) {
+      const num = tasks.length + 1;
+      const newEntry = { id: num, title: newTask, status: false };
+      setTask([...tasks, newEntry]);
       setNewTask("");
     }
   };
 
-  const deleteTask = (index) => {
-    const updatedTaskList = [...tasks];
-    updatedTaskList.splice(index, 1);
+  // Mark Complete Task Item
+  const markComplete = (id) => {
+    const newTask = tasks.map((task) => {
+      if (task.id === id) {
+        return { ...task, status: !task.status };
+      }
+      return task;
+    });
+    setTask(newTask);
+  };
+
+  //Delete Task Item
+  const deleteTask = (id) => {
+    const updatedTaskList = tasks.filter((task) => task.id !== id);
     setTask(updatedTaskList);
   };
 
@@ -62,7 +77,13 @@ const TodoApp = () => {
                 </p>
               ) : (
                 tasks.map((task, i) => (
-                  <TodoList task={task} key={i} i={i} deleteTask={deleteTask} />
+                  <TodoList
+                    task={task}
+                    key={task.id}
+                    index={i}
+                    deleteTask={deleteTask}
+                    markComplete={markComplete}
+                  />
                 ))
               )}
             </div>
