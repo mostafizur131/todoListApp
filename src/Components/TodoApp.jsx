@@ -62,7 +62,7 @@ const TodoApp = () => {
           <h2 className="mb-3 text-2xl font-semibold ">Lists</h2>
           <div className="overflow-x-auto">
             <div className="min-w-full text-sm">
-              <div className="rounded-t-lg bg-gray-700">
+              <div className="rounded-t-lg text-gray-900 font-bold bg-gray-200">
                 <ul className="grid grid-cols-12">
                   <li className="text-lg p-3 col-span-1">#</li>
                   <li className="text-lg p-3 col-span-8">Tasks</li>
