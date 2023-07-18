@@ -1,9 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TodoList from "./TodoList";
 import EditTask from "./EditTask";
 
+const getTasksFromLocalStorage = () => {
+  const tasks = localStorage.getItem("tasks");
+  if (tasks) {
+    return JSON.parse(localStorage.getItem("tasks"));
+  } else {
+    return [];
+  }
+};
+
 const TodoApp = () => {
-  const [tasks, setTask] = useState([]);
+  const [tasks, setTask] = useState(getTasksFromLocalStorage());
   const [newTask, setNewTask] = useState("");
   // Modal State
   const [openModal, setOpenModal] = useState(false);
@@ -64,6 +73,11 @@ const TodoApp = () => {
     setUpdatedData("newEntry");
     handleCloseModal();
   };
+
+  // Add Task Data To Local Storage
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
   return (
     <div className="bg-gray-200 h-screen py-10">
